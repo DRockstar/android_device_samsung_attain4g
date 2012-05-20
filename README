@@ -1,0 +1,21 @@
+This project contains device files to port ClockworkMod for the Samsung Attain 4G, model SCH-R920.
+
+At this time this port will require custom modification to the CyanogenMod recovery sources, due to the RFS formatting outlined in the stock recovery.fstab:
+
+[device]
+# mount point	fstype	device				format option	mount option
+/system		rfs		/dev/block/stl10	default		default
+/dbdata		rfs		/dev/block/stl11	rfs16		default
+/cache		rfs		/dev/block/mmcblk0p4	rfs16_8		default
+/data		rfs		/dev/block/mmcblk0p1	rfs32		default
+/fota		rfs		/dev/block/mmcblk0p2	rfs16		default
+/preinstall	rfs		/dev/block/mmcblk0p3	rfs16		default
+
+[format]
+#index		option
+rfs16		"/sbin/fat.format -F 16 -s 1 -S 4096"
+rfs32		"/sbin/fat.format -F 32 -s 4 -S 4096"
+rfs16_8		"/sbin/fat.format -F 16 -s 16 -S 512"
+
+This may require a custom graphics.c file.
+
